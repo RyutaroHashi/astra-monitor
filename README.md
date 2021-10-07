@@ -1,5 +1,5 @@
 # FAA Monitor
-* string.sh - parse HTML content of the [Experimental Licensing System Generic Search](https://apps.fcc.gov/oetcf/els/reports/GenericSearch.cfm) results. If it contains `STRING`, notifications will be sent to recipients up to `THRESHOLD` times.
+* string.sh - parse HTML content of the [Experimental Licensing System Generic Search](https://apps.fcc.gov/oetcf/els/reports/GenericSearch.cfm) result. If it contains `STRING`, notifications will be sent to recipients up to `THRESHOLD` times.
 
 Use [SMS Gateway](https://en.wikipedia.org/wiki/SMS_gateway#Email_clients) or [SMS API](https://www.twilio.com/) to send SMS messages to a mobile device.
 
