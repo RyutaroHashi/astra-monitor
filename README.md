@@ -1,4 +1,4 @@
-# FAA Monitor
+# FCC Monitor
 * `string.sh` - parse HTML content of the [Experimental Licensing System Generic Search](https://apps.fcc.gov/oetcf/els/reports/GenericSearch.cfm) result. If it contains `STRING` more than `EXPECTED` times, notifications will be sent to recipients up to `THRESHOLD` times.
 
 Use [SMS Gateway](https://en.wikipedia.org/wiki/SMS_gateway#Email_clients) or [SMS API](https://www.twilio.com/) to send SMS messages to a mobile device.
@@ -42,12 +42,12 @@ The major ISPs usually block emails if you try sending directly. To get around t
 1. Test
    ```bash
    msmtp -a spectrum me@me.com <<EOF
-   From: "FAA Monitor" <faa@twc.com>
+   From: "FCC Monitor" <fcc@twc.com>
    To: me@me.com
-   Subject: FAA Alert! - $COUNTER/$THRESHOLD
+   Subject: FCC Alert! - $COUNTER/$THRESHOLD
    Content-Type: text/plain; charset=utf-8
    
-   The FAA has updated the status of Astra's application!
+   The FCC has updated the status of Astra's application!
    EOF
    ```
 1. Check the log
@@ -58,6 +58,6 @@ The major ISPs usually block emails if you try sending directly. To get around t
 ### cron
 Set up scheduled tasks to monitor on a regular basis. Adjust the `hour (0 - 23)` and `day of week (0 - 6) (Sunday=0)` for the system time zone. See following examples for `PDT` time (UTC/GMT-07:00).
 ```bash
-# FAA Monitor (M-F 8AM-5PM EST)
-*/5 5-14 * * 1-5 /opt/faa-monitor/string.sh >/dev/null 2>&1
+# FCC Monitor (M-F 8AM-5PM EST)
+*/5 5-14 * * 1-5 /opt/fcc-monitor/string.sh >/dev/null 2>&1
 ```
