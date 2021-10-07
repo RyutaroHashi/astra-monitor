@@ -54,12 +54,12 @@ if ! [[ "$records" -eq "$EXPECTED" ]] ; then
       for recipient in $EMAIL_TO
       do
         msmtp -C $MSMTP_CONFIG -a $MSMTP_ACCOUNT $recipient <<EOF
-From: "FAA Monitor" <faa@twc.com>
+From: "FCC Monitor" <fcc@twc.com>
 To: $recipient
-Subject: FAA Alert! - $COUNTER/$THRESHOLD
+Subject: FCC Alert! - $COUNTER/$THRESHOLD
 Content-Type: text/plain; charset=utf-8
 
-The FAA has updated the status of Astra's application!
+The FCC has updated the status of Astra's application!
 EOF
         sleep 1
       done
@@ -69,12 +69,12 @@ EOF
       for recipient in $SMS_TO
       do
         msmtp -C $MSMTP_CONFIG -a $MSMTP_ACCOUNT $recipient <<EOF
-From: "FAA Monitor" <faa@twc.com>
+From: "FCC Monitor" <fcc@twc.com>
 To: $recipient
-Subject: FAA Alert! - $COUNTER/$THRESHOLD
+Subject: FCC Alert! - $COUNTER/$THRESHOLD
 Content-Type: text/plain; charset=utf-8
 
-The FAA has updated the status of Astra's application!
+The FCC has updated the status of Astra's application!
 EOF
         sleep 1
       done
