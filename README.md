@@ -1,5 +1,5 @@
 # FAA Monitor
-* string.sh - parse HTML content of the [Experimental Licensing System Generic Search](https://apps.fcc.gov/oetcf/els/reports/GenericSearch.cfm) result. If it contains `STRING`, notifications will be sent to recipients up to `THRESHOLD` times.
+* `string.sh` - parse HTML content of the [Experimental Licensing System Generic Search](https://apps.fcc.gov/oetcf/els/reports/GenericSearch.cfm) result. If it contains `STRING` more than `EXPECTED` times, notifications will be sent to recipients up to `THRESHOLD` times.
 
 Use [SMS Gateway](https://en.wikipedia.org/wiki/SMS_gateway#Email_clients) or [SMS API](https://www.twilio.com/) to send SMS messages to a mobile device.
 
@@ -42,12 +42,12 @@ The major ISPs usually block emails if you try sending directly. To get around t
 1. Test
    ```bash
    msmtp -a spectrum me@me.com <<EOF
-   From: "LexShares Monitor" <monitor@lexshares.com>
+   From: "FAA Monitor" <faa@twc.com>
    To: me@me.com
-   Subject: LexShares Case Prep Alert!
+   Subject: FAA Alert! - $COUNTER/$THRESHOLD
    Content-Type: text/plain; charset=utf-8
    
-   Check out the case portfolio at https://www.lexshares.com/cases
+   The FAA has updated the status of Astra's application!
    EOF
    ```
 1. Check the log
