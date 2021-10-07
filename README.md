@@ -56,8 +56,8 @@ The major ISPs usually block emails if you try sending directly. To get around t
    ```
 
 ### cron
-Set up scheduled tasks to monitor on a regular basis. Adjust the `hour (0 - 23)` and `day of week (0 - 6) (Sunday=0)` for the system time zone. See following examples for `PDT` time (UTC/GMT-07:00).
+Set up scheduled tasks to monitor on a regular basis. Adjust the `hour (0 - 23)` and `day of week (0 - 6) (Sunday=0)` for the system time zone. See the following example for trading hours in PT (UTC/GMT-08:00).
 ```bash
-# FCC Monitor (M-F 8AM-5PM EST)
-*/5 5-14 * * 1-5 /opt/fcc-monitor/string.sh >/dev/null 2>&1
+# FCC Monitor (M-F 4AM-8PM ET)
+*/5 1-17 * * 1-5 /opt/fcc-monitor/string.sh >/dev/null 2>&1
 ```
