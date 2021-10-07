@@ -23,10 +23,22 @@ EMAIL_TO="me@me.com you@you.com"
 USE_SMS=false
 SMS_TO="2122222222@txt.att.net 6466666666@messaging.sprintpcs.com 3322222222@tmomail.net 4155555555@vtext.com"
 
-# Check the string
-records=$(curl -s -d @PARAMETERS -X POST https://apps.fcc.gov/oetcf/els/reports/GenericSearchResult.cfm | grep "$STRING" | wc -l)
+# Perform Search
+curl -s -o GenericSearchResult -d 'callsign=&FRN=&scope_of_service=&id_file_num=&name_licensee=Astra Space&purpose_of_operation=&narrative_comments=&grant_date_from=&receipt_date_from=&expiration_date_from=&emission=&experiment_type=&tx_city=&transmitter_state=&frequency_type=&lower_frequency=&upper_frequency=&power_type=&erp_from=&erp_to=&show_records=10&pending=Y&special_temporary_authority=Y&conventional_license=Y' -X POST https://apps.fcc.gov/oetcf/els/reports/GenericSearchResult.cfm
+
+# Check the file size
+if [[ $(stat -c %s GenericSearchResult) -lt 10240 ]]; then
+  echo 'cURL failed'
+  exit 1
+fi
+
+# Count the total number of lines of STRING
+records=$(grep "$STRING" GenericSearchResult | wc -l)
+rm -f GenericSearchResult
 
 if ! [[ "$records" -eq "$EXPECTED" ]] ; then
+  echo "Application status changed!"
+
   # Increment the counter
   if [[ -f counter.txt ]]; then
     COUNTER=$(cat counter.txt)
@@ -46,6 +58,7 @@ From: "FAA Monitor" <faa@twc.com>
 To: $recipient
 Subject: FAA Alert! - $COUNTER/$THRESHOLD
 Content-Type: text/plain; charset=utf-8
+
 The FAA has updated the status of Astra's application!
 EOF
         sleep 1
@@ -60,6 +73,7 @@ From: "FAA Monitor" <faa@twc.com>
 To: $recipient
 Subject: FAA Alert! - $COUNTER/$THRESHOLD
 Content-Type: text/plain; charset=utf-8
+
 The FAA has updated the status of Astra's application!
 EOF
         sleep 1
