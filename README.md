@@ -1,5 +1,6 @@
-# FCC Monitor
-* `string.sh` - parse HTML content of the [Experimental Licensing System Generic Search](https://apps.fcc.gov/oetcf/els/reports/GenericSearch.cfm) result. If it contains `STRING` more than `EXPECTED` times, notifications will be sent to recipients up to `THRESHOLD` times.
+# Astra Monitor
+* `faa.sh` - parse HTML content of the [TFR List](https://tfr.faa.gov/tfr2/list.html) page. If it contains `STRING` more than `EXPECTED` times, notifications will be sent to recipients up to `THRESHOLD` times.
+* `fcc.sh` - parse HTML content of the [Experimental Licensing System Generic Search](https://apps.fcc.gov/oetcf/els/reports/GenericSearch.cfm) result. If it contains `STRING` more than `EXPECTED` times, notifications will be sent to recipients up to `THRESHOLD` times.
 
 Use [SMS Gateway](https://en.wikipedia.org/wiki/SMS_gateway#Email_clients) or [SMS API](https://www.twilio.com/) to send SMS messages to a mobile device.
 
@@ -58,6 +59,7 @@ The major ISPs usually block emails if you try sending directly. To get around t
 ### cron
 Set up scheduled tasks to monitor on a regular basis. Adjust the `hour (0 - 23)` and `day of week (0 - 6) (Sunday=0)` for the system time zone. See the following example for trading hours in PT (UTC/GMT-08:00).
 ```bash
-# FCC Monitor (M-F 4AM-8PM ET)
-*/5 1-17 * * 1-5 /opt/fcc-monitor/string.sh >/dev/null 2>&1
+# Astra Monitors (M-F 4AM-8PM ET)
+*/5 1-17 * * 1-5 /opt/astra-monitor/faa.sh >/dev/null 2>&1
+*/5 1-17 * * 1-5 /opt/astra-monitor/fcc.sh >/dev/null 2>&1
 ```
