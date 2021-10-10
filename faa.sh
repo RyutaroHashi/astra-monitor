@@ -27,7 +27,7 @@ SMS_TO="2122222222@txt.att.net 6466666666@messaging.sprintpcs.com 3322222222@tmo
 curl -s -o TFRList -d 'type=SPACE OPERATIONS' -X POST https://tfr.faa.gov/tfr2/list.jsp
 
 # Check the file size
-if [[ $(stat -c %s GenericSearchResult) -lt 10240 ]]; then
+if [[ $(stat -c %s TFRList) -lt 10240 ]]; then
   echo 'cURL failed'
   exit 1
 fi
