@@ -43,12 +43,12 @@ The major ISPs usually block emails if you try sending directly. To get around t
 1. Test
    ```bash
    msmtp -a spectrum me@me.com <<EOF
-   From: "FCC Monitor" <fcc@twc.com>
+   From: "Astra Monitor" <astra@twc.com>
    To: me@me.com
-   Subject: FCC Alert! - $COUNTER/$THRESHOLD
+   Subject: Astra Alert! - $COUNTER/$THRESHOLD
    Content-Type: text/plain; charset=utf-8
    
-   The FCC has updated the status of Astra's application!
+   This is a test of the Astra Monitor Alert System.
    EOF
    ```
 1. Check the log
