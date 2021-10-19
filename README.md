@@ -6,7 +6,7 @@ Use [SMS Gateway](https://en.wikipedia.org/wiki/SMS_gateway#Email_clients) or [S
 
 ## Requirements
 * cURL
-* msmtp
+* [msmtp](https://marlam.de/msmtp/msmtp.html)
 * cron
 
 ## Setup
