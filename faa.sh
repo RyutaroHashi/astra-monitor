@@ -23,6 +23,9 @@ EMAIL_TO="me@me.com you@you.com"
 USE_SMS=false
 SMS_TO="2122222222@txt.att.net 6466666666@messaging.sprintpcs.com 3322222222@tmomail.net 4155555555@vtext.com"
 
+# Use a temporary directory
+cd /tmp
+
 # Perform Search
 curl -s -o TFRList -d 'type=SPACE OPERATIONS' -X POST https://tfr.faa.gov/tfr2/list.jsp
 
