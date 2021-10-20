@@ -23,6 +23,9 @@ EMAIL_TO="me@me.com you@you.com"
 USE_SMS=false
 SMS_TO="2122222222@txt.att.net 6466666666@messaging.sprintpcs.com 3322222222@tmomail.net 4155555555@vtext.com"
 
+# Use a temporary directory
+cd /tmp
+
 # Perform Search
 curl -s -o GenericSearchResult -d 'callsign=&FRN=&scope_of_service=&id_file_num=&name_licensee=Astra Space&purpose_of_operation=&narrative_comments=&grant_date_from=&receipt_date_from=&expiration_date_from=&emission=&experiment_type=&tx_city=&transmitter_state=&frequency_type=&lower_frequency=&upper_frequency=&power_type=&erp_from=&erp_to=&show_records=10&pending=Y&special_temporary_authority=Y&conventional_license=Y' -X POST https://apps.fcc.gov/oetcf/els/reports/GenericSearchResult.cfm
 
