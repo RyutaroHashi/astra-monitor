@@ -40,7 +40,7 @@ records=$(grep "$STRING" TFRList | wc -l)
 rm -f TFRList
 
 if ! [[ "$records" -eq "$EXPECTED" ]] ; then
-  echo "New NOTAM found for Kodiak, Alaska!"
+  echo "New update found for Kodiak, Alaska!"
 
   # Increment the counter
   if [[ -f counter.txt ]]; then
