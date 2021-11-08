@@ -62,7 +62,7 @@ To: $recipient
 Subject: FAA Alert! - $COUNTER/$THRESHOLD
 Content-Type: text/plain; charset=utf-8
 
-The FAA has approved a new rocket launch in Kodiak, Alaska!
+The FAA has updated a NOTAM in Kodiak, Alaska!
 EOF
         sleep 1
       done
@@ -77,7 +77,7 @@ To: $recipient
 Subject: FAA Alert! - $COUNTER/$THRESHOLD
 Content-Type: text/plain; charset=utf-8
 
-The FAA has approved a new rocket launch in Kodiak, Alaska!
+The FAA has updated a NOTAM in Kodiak, Alaska!
 EOF
         sleep 1
       done
