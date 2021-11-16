@@ -11,6 +11,7 @@ export PATH=/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin
 
 # Monitor Configuration
 STRING='KODIAK'
+EXPECTED=1
 THRESHOLD=3
 # msmtp
 MSMTP_CONFIG=/usr/lib/msmtp/.msmtprc
@@ -34,8 +35,11 @@ if [[ $(stat -c %s TFRList) -lt 10240 ]]; then
   exit 1
 fi
 
-if [[ $(grep -A 1 "$STRING" TFRList | grep "New") ]]; then
-  echo "New update found for ${STRING}!"
+# Count the total number of lines of STRING
+records=$(grep "$STRING" TFRList | wc -l)
+
+if [[ "$records" -lt "$EXPECTED" ]] || [[ $(grep -A 1 "$STRING" TFRList | grep "New") ]]; then
+  echo "New change found for ${STRING}!"
   rm -f TFRList
 
   # Increment the counter
@@ -58,7 +62,7 @@ To: $recipient
 Subject: FAA Alert! - $COUNTER/$THRESHOLD
 Content-Type: text/plain; charset=utf-8
 
-The FAA has updated a NOTAM in ${STRING}!
+New change found for ${STRING}!
 EOF
         sleep 1
       done
@@ -73,7 +77,7 @@ To: $recipient
 Subject: FAA Alert! - $COUNTER/$THRESHOLD
 Content-Type: text/plain; charset=utf-8
 
-The FAA has updated a NOTAM in ${STRING}!
+New change found for ${STRING}!
 EOF
         sleep 1
       done
