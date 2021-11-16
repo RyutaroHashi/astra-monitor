@@ -1,5 +1,5 @@
 # Astra Monitor
-* `faa.sh` - parse HTML content of the [TFR List](https://tfr.faa.gov/tfr2/list.html) page. If it contains `STRING` and it is "New", notifications will be sent to recipients up to `THRESHOLD` times.
+* `faa.sh` - parse HTML content of the [TFR List](https://tfr.faa.gov/tfr2/list.html) page. If it contains `STRING` less than `EXPECTED` times, or if it contains `STRING` and it is "New", notifications will be sent to recipients up to `THRESHOLD` times.
 * `fcc.sh` - parse HTML content of the [Experimental Licensing System Generic Search](https://apps.fcc.gov/oetcf/els/reports/GenericSearch.cfm) result. If it contains `STRING` more than `EXPECTED` times, notifications will be sent to recipients up to `THRESHOLD` times.
 
 Use [SMS Gateway](https://en.wikipedia.org/wiki/SMS_gateway#Email_clients) or [SMS API](https://www.twilio.com/) to send SMS messages to a mobile device.
