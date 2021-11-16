@@ -11,7 +11,6 @@ export PATH=/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin
 
 # Monitor Configuration
 STRING='KODIAK'
-EXPECTED=1
 THRESHOLD=3
 # msmtp
 MSMTP_CONFIG=/usr/lib/msmtp/.msmtprc
@@ -35,12 +34,9 @@ if [[ $(stat -c %s TFRList) -lt 10240 ]]; then
   exit 1
 fi
 
-# Count the total number of lines of STRING
-records=$(grep "$STRING" TFRList | wc -l)
-rm -f TFRList
-
-if ! [[ "$records" -eq "$EXPECTED" ]] ; then
-  echo "New update found for Kodiak, Alaska!"
+if [[ $(grep -A 1 "$STRING" TFRList | grep "New") ]]; then
+  echo "New update found for ${STRING}!"
+  rm -f TFRList
 
   # Increment the counter
   if [[ -f counter.txt ]]; then
@@ -62,7 +58,7 @@ To: $recipient
 Subject: FAA Alert! - $COUNTER/$THRESHOLD
 Content-Type: text/plain; charset=utf-8
 
-The FAA has updated a NOTAM in Kodiak, Alaska!
+The FAA has updated a NOTAM in ${STRING}!
 EOF
         sleep 1
       done
@@ -77,7 +73,7 @@ To: $recipient
 Subject: FAA Alert! - $COUNTER/$THRESHOLD
 Content-Type: text/plain; charset=utf-8
 
-The FAA has updated a NOTAM in Kodiak, Alaska!
+The FAA has updated a NOTAM in ${STRING}!
 EOF
         sleep 1
       done
