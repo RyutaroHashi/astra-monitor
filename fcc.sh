@@ -13,6 +13,7 @@ export PATH=/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin
 STRING='Pending'
 EXPECTED=1
 THRESHOLD=1
+THRESHOLD_FILE=counter_fcc.txt
 # msmtp
 MSMTP_CONFIG=/usr/lib/msmtp/.msmtprc
 MSMTP_ACCOUNT=spectrum
@@ -43,13 +44,13 @@ if ! [[ "$records" -eq "$EXPECTED" ]] ; then
   echo "Application status changed!"
 
   # Increment the counter
-  if [[ -f counter_fcc.txt ]]; then
-    COUNTER=$(cat counter_fcc.txt)
+  if [[ -f $THRESHOLD_FILE ]]; then
+    COUNTER=$(cat $THRESHOLD_FILE)
     let COUNTER++
   else
     COUNTER=1
   fi
-  echo $COUNTER > counter_fcc.txt
+  echo $COUNTER > $THRESHOLD_FILE
 
   if [[ "$COUNTER" -le "$THRESHOLD" ]]; then
     # Send emails
@@ -85,5 +86,5 @@ EOF
   fi
 else
   # Remove the counter file
-  [[ -e counter_fcc.txt ]] && rm -f counter_fcc.txt
+  [[ -e $THRESHOLD_FILE ]] && rm -f $THRESHOLD_FILE
 fi
