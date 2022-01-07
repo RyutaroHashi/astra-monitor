@@ -12,7 +12,7 @@ export PATH=/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin
 # Monitor Configuration
 STRING='KODIAK'
 EXPECTED=1
-THRESHOLD=3
+THRESHOLD=1
 # msmtp
 MSMTP_CONFIG=/usr/lib/msmtp/.msmtprc
 MSMTP_ACCOUNT=spectrum
@@ -43,13 +43,13 @@ if [[ "$records" -lt "$EXPECTED" ]] || [[ $(grep -A 1 "$STRING" TFRList | grep "
   rm -f TFRList
 
   # Increment the counter
-  if [[ -f counter.txt ]]; then
-    COUNTER=$(cat counter.txt)
+  if [[ -f counter_faa.txt ]]; then
+    COUNTER=$(cat counter_faa.txt)
     let COUNTER++
   else
     COUNTER=1
   fi
-  echo $COUNTER > counter.txt
+  echo $COUNTER > counter_faa.txt
 
   if [[ "$COUNTER" -le "$THRESHOLD" ]]; then
     # Send emails
@@ -85,5 +85,5 @@ EOF
   fi
 else
   # Remove the counter file
-  [[ -e counter.txt ]] && rm -f counter.txt
+  [[ -e counter_faa.txt ]] && rm -f counter_faa.txt
 fi
